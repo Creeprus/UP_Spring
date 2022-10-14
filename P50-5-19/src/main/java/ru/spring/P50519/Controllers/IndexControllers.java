@@ -38,13 +38,13 @@ public class IndexControllers {
 //        model.addAttribute("patronymic",length);
 //        return "home";
 //    };
-    @GetMapping("/Index")
-    public String Index ()
+    @GetMapping("/Home")
+    public String Home ()
     {
         return "Home";
     }
-    @GetMapping("/Home")
-    public String MainGet (@RequestParam(name="firstdigit",required = false) Double first,
+    @GetMapping("/Index")
+    public String IndexGet (@RequestParam(name="firstdigit",required = false) Double first,
                         @RequestParam(required = false, name="option_get") String option,
                         @RequestParam(required = false,name = "seconddigit") Double second,
                         Model model)
@@ -82,8 +82,8 @@ public class IndexControllers {
         return "Index";
     }
 
-    @PostMapping("/Home")
-    public String MainPost (@RequestParam(name="firstdigit",required = false) Double first,
+    @PostMapping("/Index")
+    public String IndexPost (@RequestParam(name="firstdigit",required = false) Double first,
                         @RequestParam(required = false, name="option_post") String option,
                         @RequestParam(required = false,name = "seconddigit") Double second,
                         Model model)
