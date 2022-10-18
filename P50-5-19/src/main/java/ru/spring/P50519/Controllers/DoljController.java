@@ -112,8 +112,6 @@ public class DoljController {
 //        dolj.setDescription(description);
 //        dolj.setSalary(salary);
 //        dolj.setMax_bonus(max_bonus);
-
-
         model.addAttribute("dolj",dolj);
         if (bindingResult.hasErrors())
         {
