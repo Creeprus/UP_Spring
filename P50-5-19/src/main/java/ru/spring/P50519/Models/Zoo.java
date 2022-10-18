@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class Zoo {
@@ -11,14 +12,37 @@ public class Zoo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty(message="The field should not be empty")
+    @Size(min=1,max=150,message="The field should contain more than one symbol and less than 150 symbols")
     private String name;
-
+@Max(value=50,message="Can't be older than 50")
+@Min(value=1,message="Can't be younger than 1")
+@NotNull(message="The field should not be empty")
     private Integer age;
-
+@NotBlank(message="No spaces allowed")
     private String description;
-
+@Positive(message="What kind of animal is this?")
+@NotNull(message="The field should not be empty")
     private Integer mass;
 
+
+//@PositiveOrZero
+//
+//@DecimalMax()
+//@DecimalMin()
+//
+//@Future
+//
+//@FutureOrPresent
+//
+//@Past
+//@PastOrPresent
+//
+//@Email
+//
+//@AssertTrue
+//
+//@AssertFalse
     public Zoo() {
     }
 

@@ -3,10 +3,12 @@ package ru.spring.P50519.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.P50519.Models.Zoo;
 import ru.spring.P50519.Repository.ZooRepository;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,21 +27,27 @@ public class ZooController {
         return "/Zoo/Index";
     }
     @GetMapping("/IndexAddZoo")
-    public String ZooAddView(Model model)
+    public String ZooAddView(Model model,Zoo zoo)
     {
 
         return "/Zoo/IndexAddZoo";
     }
     @PostMapping("/IndexAddZoo")
     public String ZooAdd(
-            @RequestParam String name,
-            @RequestParam String description,
-            @RequestParam Integer age,
-            @RequestParam Integer mass,
+            @Valid Zoo zoo,
+            BindingResult bindingResult,
+//            @RequestParam String name,
+//            @RequestParam String description,
+//            @RequestParam Integer age,
+//            @RequestParam Integer mass,
             Model model)
     {
-        Zoo animal=new Zoo(name,age,description,mass);
-        zooRepository.save(animal);
+        if(bindingResult.hasErrors())
+        {
+            return "/Zoo/IndexAddZoo";
+        }
+        //Zoo animal=new Zoo(name,age,description,mass);
+        zooRepository.save(zoo);
         return "redirect:/Zoo/Index";
     }
     @GetMapping("/Filter")

@@ -10,11 +10,15 @@
 <div th:insert="fragments/header" :: headerMain></div>
 <h1>Add animals</h1>
 <div>
-  <form method="post">
-    <input type="text" placeholder="Имя животного" name="name"><br>
-    <input type="text" placeholder="Описание животного" name="description"><br>
-    <input type="number" placeholder="Возраст животного" name="age"><br>
-    <input type="number" placeholder="Масса животного" name="mass"><br>
+  <form method="post" th:object="${zoo}">
+    <input th:field="*{name}" type="text" placeholder="Имя животного" name="name"><br>
+   <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></div><br>
+    <input th:field="*{description}" type="text" placeholder="Описание животного" name="description"><br>
+    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:red"></div><br>
+    <input th:field="*{age}" type="number" placeholder="Возраст животного" name="age"><br>
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red"></div><br>
+    <input th:field="*{mass}" type="number" placeholder="Масса животного" name="mass"><br>
+    <div th:if="${#fields.hasErrors('mass')}" th:errors="*{mass}" style="color:red"></div><br>
     <input type="submit" value="Добавить животного">
   </form>
   <a href="/Zoo/Index">Back</a>

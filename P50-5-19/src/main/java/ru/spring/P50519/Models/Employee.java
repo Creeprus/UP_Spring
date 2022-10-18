@@ -4,22 +4,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
+
 @Entity
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty(message="Поле не должно быть пустым")
+    @Size(min=3,max=30,message="Поле должно содержать не менне 3х и не более 30 символов")
     private String name;
-
+    @NotEmpty(message="Поле не должно быть пустым")
+    @Size(min=3,max=30,message="Поле должно содержать не менне 3х и не более 30 символов")
     private String surname;
 
+    @NotBlank(message="Пробелы недопустимы")
     private String patronymic;
-
+    @Max(value=150,message="Сотруднику должно быть не более 150 лет")
+    @Min(value=16,message="Сотруднику должно быть не менее 16 лет")
+    @NotNull(message="Поле не должно быть пустым")
     private int age;
-
+    @PositiveOrZero
+    @NotNull(message="Поле не должно быть пустым")
     private int amount_of_kids;
-
+    @NotEmpty(message="Поле не должно быть пустым")
+    @Size(min=3,max=50,message="Поле должно содержать не менне 3х и не более 30 символов")
     private String nationality;
 
     public String getNationality() {

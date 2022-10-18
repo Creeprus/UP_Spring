@@ -8,18 +8,23 @@
     <title>Dolj</title>
 </head>
 <body>
-<div th:insert="fragments/header" :: headerMain></div>
-<h1>Add dolj</h1>
+<div th:insert="fragments/header :: headerMain"></div>
+<h1>Добавить должность</h1>
 <div>
-    <form method="post">
-        <input type="text" placeholder="Наименование " name="name"><br>
-        <input type="number" placeholder="Налог " name="tax"><br>
-        <input type="text" placeholder="Описание должности " name="description"><br>
-        <input type="number" placeholder="Оклад" name="salary"><br>
-        <input type="number" placeholder="Максимально возможная премия" name="max_bonus"><br>
+    <form method="post" th:object="${dolj}">
+        <input th:field="*{name}" type="text" placeholder="Наименование " name="name"><br>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></div><br>
+        <input th:field="*{tax}" type="number" placeholder="Налог " name="tax"><br>
+        <div th:if="${#fields.hasErrors('tax')}" th:errors="*{tax}" style="color:red"></div><br>
+        <input th:field="*{description}" type="text" placeholder="Описание должности " name="description"><br>
+        <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:red"></div><br>
+        <input th:field="*{salary}" type="number" placeholder="Оклад" name="salary"><br>
+        <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" style="color:red"></div><br>
+        <input th:field="*{max_bonus}" type="number" placeholder="Максимально возможная премия" name="max_bonus"><br>
+        <div th:if="${#fields.hasErrors('max_bonus')}" th:errors="*{max_bonus}" style="color:red"></div><br>
         <input type="submit" value="Добавить должность">
     </form>
-    <a href="/Dolj/Index">Back</a>
+    <a href="/Dolj/Index">Обратно</a>
     <a href="/Home">Home</a>
 </div>
 

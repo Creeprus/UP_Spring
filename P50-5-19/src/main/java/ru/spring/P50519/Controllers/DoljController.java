@@ -3,11 +3,13 @@ package ru.spring.P50519.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.P50519.Models.Dolj;
 import ru.spring.P50519.Models.Employee;
 import ru.spring.P50519.Repository.DoljRepository;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,21 +28,27 @@ public class DoljController {
         return "/Dolj/Index";
     }
     @GetMapping("/IndexAddDolj")
-    public String DoljAddView(Model model)
+    public String DoljAddView(Model model,Dolj dolj)
     {
 
         return "/Dolj/IndexAddDolj";
     }
     @PostMapping("/IndexAddDolj")
     public String DoljAdd(
-            @RequestParam String name,
-            @RequestParam Integer tax,
-            @RequestParam String description,
-            @RequestParam Integer salary,
-            @RequestParam Integer max_bonus,
+            @Valid Dolj dolj,
+            BindingResult bindingResult,
+//            @RequestParam String name,
+//            @RequestParam Integer tax,
+//            @RequestParam String description,
+//            @RequestParam Integer salary,
+//            @RequestParam Integer max_bonus,
             Model model)
     {
-        Dolj dolj=new Dolj(name,tax,description,salary,max_bonus);
+        if(bindingResult.hasErrors())
+        {
+            return "/Dolj/IndexAddDolj";
+        }
+        //Dolj dolj=new Dolj(name,tax,description,salary,max_bonus);
         doljRepository.save(dolj);
         return "redirect:/Dolj/Index";
     }
@@ -80,30 +88,38 @@ public class DoljController {
     }
     @GetMapping ("/DoljEdit/{id}")
     public String DoljEditView(@PathVariable Long id,
-                              Model model)
+                              Model model,Dolj dolj)
     {
-        Dolj dolj= doljRepository.findById(id).orElseThrow();
-        model.addAttribute("doljs",dolj);
+         dolj= doljRepository.findById(id).orElseThrow();
+        model.addAttribute("dolj",dolj);
         return "/Dolj/DoljEdit";
     }
     @PostMapping ("/DoljEdit/{id}")
-    public String DoljEdit( @PathVariable Long id,
-                            @RequestParam String name,
-                            @RequestParam Integer tax,
-                            @RequestParam String description,
-                            @RequestParam Integer salary,
-                            @RequestParam Integer max_bonus,
+    public String DoljEdit(
+            @Valid Dolj dolj,
+            BindingResult bindingResult,
+//            @PathVariable Long id,
+//                            @RequestParam String name,
+//                            @RequestParam Integer tax,
+//                            @RequestParam String description,
+//                            @RequestParam Integer salary,
+//                            @RequestParam Integer max_bonus,
                            Model model)
     {
-        Dolj dolj= doljRepository.findById(id).orElseThrow();
-        dolj.setName(name);
-        dolj.setTax(tax);
-        dolj.setDescription(description);
-        dolj.setSalary(salary);
-        dolj.setMax_bonus(max_bonus);
+       //  dolj= doljRepository.findById(id).orElseThrow();
+//        dolj.setName(name);
+//        dolj.setTax(tax);
+//        dolj.setDescription(description);
+//        dolj.setSalary(salary);
+//        dolj.setMax_bonus(max_bonus);
 
+
+        model.addAttribute("dolj",dolj);
+        if (bindingResult.hasErrors())
+        {
+            return "/Dolj/DoljEdit";
+        }
         doljRepository.save(dolj);
-        model.addAttribute("doljs",dolj);
         return "redirect:/Dolj/Index";
     }
 }

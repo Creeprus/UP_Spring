@@ -3,6 +3,7 @@ package ru.spring.P50519.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.P50519.Models.Dolj;
 import ru.spring.P50519.Models.Employee;
@@ -11,6 +12,7 @@ import ru.spring.P50519.Repository.DoljRepository;
 import ru.spring.P50519.Repository.EmployeeRepository;
 import ru.spring.P50519.Repository.ZooRepository;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,23 +32,29 @@ public class EmployeeController {
     }
 
     @GetMapping("/IndexAddEmp")
-    public String EmpAddView(Model model)
+    public String EmpAddView(Model model,Employee employee)
     {
 
         return "/Employee/IndexAddEmp";
     }
     @PostMapping("/IndexAddEmp")
     public String EmpAdd(
-            @RequestParam String name,
-            @RequestParam String surname,
-            @RequestParam String patronymic,
-            @RequestParam Integer age,
-            @RequestParam Integer amount_of_kids,
-            @RequestParam String nationality,
+            @Valid Employee employee,
+            BindingResult bindingResult,
+//            @RequestParam String name,
+//            @RequestParam String surname,
+//            @RequestParam String patronymic,
+//            @RequestParam Integer age,
+//            @RequestParam Integer amount_of_kids,
+//            @RequestParam String nationality,
             Model model)
     {
-        Employee emp=new Employee(name,surname,patronymic,age,amount_of_kids,nationality);
-        employeeRepository.save(emp);
+        if(bindingResult.hasErrors())
+        {
+            return "/Employee/IndexAddEmp";
+        }
+        //Employee emp=new Employee(name,surname,patronymic,age,amount_of_kids,nationality);
+        employeeRepository.save(employee);
         return "redirect:/Employee/Index";
     }
     @GetMapping("/Filter")
@@ -84,32 +92,39 @@ public class EmployeeController {
         return "redirect:/Employee/Index";
     }
     @GetMapping ("/EmployeeEdit/{id}")
-    public String EmpEditView(@PathVariable Long id,
+    public String EmpEditView(@PathVariable Long id,Employee employee,
                               Model model)
     {
-        Employee emp= employeeRepository.findById(id).orElseThrow();
-        model.addAttribute("emp",emp);
+        employee= employeeRepository.findById(id).orElseThrow();
+        model.addAttribute("employee",employee);
         return "/Employee/EmployeeEdit";
     }
     @PostMapping ("/EmployeeEdit/{id}")
-    public String EmpEdit( @PathVariable Long id,
-                           @RequestParam String name,
-                           @RequestParam String surname,
-                           @RequestParam String patronymic,
-                           @RequestParam Integer age,
-                           @RequestParam Integer amount_of_kids,
-                           @RequestParam String nationality,
+    public String EmpEdit(   @Valid Employee employee,
+                             BindingResult bindingResult,
+//            @PathVariable Long id,
+//                           @RequestParam String name,
+//                           @RequestParam String surname,
+//                           @RequestParam String patronymic,
+//                           @RequestParam Integer age,
+//                           @RequestParam Integer amount_of_kids,
+//                           @RequestParam String nationality,
                            Model model)
     {
-        Employee emp= employeeRepository.findById(id).orElseThrow();
-        emp.setName(name);
-        emp.setSurname(surname);
-        emp.setPatronymic(patronymic);
-        emp.setAge(age);
-        emp.setAmount_of_kids(amount_of_kids);
-        emp.setNationality(nationality);
-        employeeRepository.save(emp);
-        model.addAttribute("emp",emp);
+//        Employee emp= employeeRepository.findById(id).orElseThrow();
+//        emp.setName(name);
+//        emp.setSurname(surname);
+//        emp.setPatronymic(patronymic);
+//        emp.setAge(age);
+//        emp.setAmount_of_kids(amount_of_kids);
+//        emp.setNationality(nationality);
+        model.addAttribute("employee",employee);
+        if (bindingResult.hasErrors())
+        {
+            return "/Employee/EmployeeEdit";
+        }
+        employeeRepository.save(employee);
+
         return "redirect:/Employee/Index";
     }
 }

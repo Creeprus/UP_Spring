@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<div th:insert="fragments/header" :: headerMain></div>
+<div th:insert="fragments/header :: headerMain"></div>
 <div>
   <div th:each="el: ${emp}">
     <p th:text="${el.name}"> </p>
@@ -16,8 +16,8 @@
     <p th:text="${el.getAge()}"> </p>
     <p th:text="${el.amount_of_kids}"> </p>
     <p th:text="${el.nationality}"> </p>
-    <a th:href="'/Employee/EmployeeEdit/' +${el.id}" class="btn btn-primary">Edit</a>
-    <a th:href="'/Employee/EmployeeDelete/' +${el.id}" class="btn btn-secondary">Delete</a>
+    <a th:href="'/Employee/EmployeeEdit/' +${el.id}" class="btn btn-primary">Изменить</a><br>
+    <a th:href="'/Employee/EmployeeDelete/' +${el.id}" class="btn btn-secondary">Удалить</a>
   </div>
   <a th:href="'/Employee/Index'"> Назад</a>
 </div>

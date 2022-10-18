@@ -9,19 +9,25 @@
 
 </head>
 <body>
-<div th:insert="fragments/header" :: headerMain></div>
-<h1>Edit animals</h1>
+<div th:insert="fragments/header :: headerMain"></div>
+<h1>Изменить сотрудника</h1>
 
-<form method="post">
-  <input type="text" placeholder="Имя " th:value="${emp.name}" name="name"><br>
-  <input type="text" placeholder="Фамилия " th:value="${emp.surname}" name="surname"><br>
-  <input type="text" placeholder="Отчество " th:value="${emp.patronymic}" name="patronymic"><br>
-  <input type="number" placeholder="Возраст" th:value="${emp.age}" name="age"><br>
-  <input type="number" placeholder="Количество детей" th:value="${emp.amount_of_kids}" name="amount_of_kids"><br>
-  <input type="text" placeholder="Национальность" th:value="${emp.nationality}" name="nationality"><br>
+<form method="post" th:object="${employee}">
+  <input th:field="*{name}"  type="text" placeholder="Имя " th:value="${employee.name}" name="name"><br>
+  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></div><br>
+  <input th:field="*{surname}"  type="text" placeholder="Фамилия " th:value="${employee.surname}" name="surname"><br>
+  <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" style="color:red"></div><br>
+  <input th:field="*{patronymic}"  type="text" placeholder="Отчество " th:value="${employee.patronymic}" name="patronymic"><br>
+  <div th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}" style="color:red"></div><br>
+  <input th:field="*{age}" type="number" placeholder="Возраст" th:value="${employee.age}" name="age"><br>
+  <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red"></div><br>
+  <input th:field="*{amount_of_kids}" type="number" placeholder="Количество детей" th:value="${employee.amount_of_kids}" name="amount_of_kids"><br>
+  <div th:if="${#fields.hasErrors('amount_of_kids')}" th:errors="*{amount_of_kids}" style="color:red"></div><br>
+  <input th:field="*{nationality}" type="text" placeholder="Национальность" th:value="${employee.nationality}" name="nationality"><br>
+  <div th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" style="color:red"></div><br>
   <input type="submit" value="Изменить Работника" class="btn btn-primary">
 </form>
-<a th:href="'/Employee/EmployeeDetail/' +${emp.id}" class="btn btn-secondary">Back</a>
+<a th:href="'/Employee/EmployeeDetail/' +${employee.id}" class="btn btn-secondary">Обратно</a>
 
 
 </body>

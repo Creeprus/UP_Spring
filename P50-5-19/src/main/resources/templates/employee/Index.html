@@ -10,12 +10,12 @@
 <div th:insert="fragments/header" :: headerMain></div>
 <div class="row">
 
-<h1>Employee's list</h1>
+<h1>Список сотрудников</h1>
   <div th:each="el: ${emps}">
     <p th:text="${el.name}"> </p>
     <p th:text="${el.surname}"> </p>
     <p th:text="${el.patronymic}"> </p>
-      <a th:href="'/Employee/EmployeeDetail/'+${el.id}" class="btn btn-primary">Details</a>
+      <a th:href="'/Employee/EmployeeDetail/'+${el.id}" class="btn btn-primary">Подробней</a>
   </div>
   <form action="/Employee/Filter" method="get">
     <input type="text" name="search_name" placeholder="Поиск">
@@ -27,7 +27,7 @@
   </form>
 
 </div>
-<a href="/Employee/IndexAddEmp" class="btn btn-light">Add Employee</a>
+<a href="/Employee/IndexAddEmp" class="btn btn-light">Добавить сотрудника</a>
 <a href="/Home">Home</a>
 </body>
 

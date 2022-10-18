@@ -8,12 +8,12 @@
 </head>
 <body>
 <div th:insert="fragments/header" :: headerMain></div>
-<h1>Dolj list</h1>
+<h1>Список должностей</h1>
 <div class="column">
     <div th:each="el: ${doljs_filtered}">
         <p th:text="${el.name}"> </p>
         <p th:number="${el.tax}"> </p>
-        <a th:href="'/Dolj/DoljDetail/'+${el.id}" class="btn btn-primary">Details</a>
+        <a th:href="'/Dolj/DoljDetail/'+${el.id}" class="btn btn-primary">Подробней</a>
 
     </div>
     <form action="/Dolj/Filter" method="get">
@@ -25,7 +25,7 @@
         <input type="submit" placeholder="Найти">
     </form>
 </div>
-<a href="/Dolj/IndexAddDolj">Add Dolj</a>
+<a href="/Dolj/IndexAddDolj">Добавить должность</a>
 <a href="/Home">Home</a>
 </body>
 </html>
