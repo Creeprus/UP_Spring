@@ -7,7 +7,7 @@
     <title>Dolj</title>
 </head>
 <body>
-<div th:insert="fragments/header" :: headerMain></div>
+<div th:insert="fragments/header :: headerMain"></div>
 <h1>Список должностей</h1>
 <div class="column">
   <div th:each="el: ${doljs}">
@@ -25,7 +25,7 @@
     <input type="submit" placeholder="Найти">
   </form>
 </div>
-<a href="/Dolj/IndexAddDolj">Добавить должность</a>
-<a href="/Home">Home</a>
+<a href="/Dolj/IndexAddDolj" class="btn btn-light">Добавить должность</a><br>
+<a href="/Home" class="btn btn-secondary">Home</a>
 </body>
 </html>

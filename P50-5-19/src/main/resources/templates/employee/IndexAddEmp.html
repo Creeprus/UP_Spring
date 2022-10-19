@@ -23,7 +23,22 @@
     <div th:if="${#fields.hasErrors('amount_of_kids')}" th:errors="*{amount_of_kids}" style="color:red"></div><br>
     <input th:field="*{nationality}" type="text" placeholder="Национальность" name="nationality"><br>
     <div th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" style="color:red"></div><br>
+    <input th:field="${account.login}" type="text" placeholder="Логин" name="login"><br>
+<!--    <div th:if="${#fields.hasErrors('login')}" th:errors="${account.login}" style="color:red"></div><br>-->
+    <input th:field="${account.password}" type="text" placeholder="Пароль" name="password"><br>
+<!--    <div th:if="${#fields.hasErrors('password')}" th:errors="${account.password}" style="color:red"></div><br>-->
+    <select name="listDolj">
+      <div th:each="element : ${listDolj}">
+        <option th:value="${element.id}" th:text="${element.name}"></option>
+      </div>
+    </select>
+    <br>
+
+
+
+
     <input type="submit" value="Добавить сотрудника" class="btn btn-success">
+
   </form>
   <a href="/Employee/Index" class="btn btn-light">Обратно</a>
   <a href="/Home" class="btn btn-light">Home</a>

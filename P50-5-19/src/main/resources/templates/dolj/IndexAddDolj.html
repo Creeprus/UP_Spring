@@ -22,6 +22,7 @@
         <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" style="color:red"></div><br>
         <input th:field="*{max_bonus}" type="number" placeholder="Максимально возможная премия" name="max_bonus"><br>
         <div th:if="${#fields.hasErrors('max_bonus')}" th:errors="*{max_bonus}" style="color:red"></div><br>
+
         <input type="submit" value="Добавить должность">
     </form>
     <a href="/Dolj/Index">Обратно</a>

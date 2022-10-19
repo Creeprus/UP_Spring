@@ -1,10 +1,8 @@
 package ru.spring.P50519.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Collection;
 
 @Entity
 public class Dolj {
@@ -25,13 +23,25 @@ public class Dolj {
 
     @PositiveOrZero(message = "Значение не должно быть негативным")
     private int max_bonus;
+    @OneToMany(mappedBy = "dolj", fetch =FetchType.EAGER)
+    private Collection<Employee> employee;
 
-    public Dolj(String name, Integer tax, String description, int salary, int max_bonus) {
+    public Dolj(Long id, String name, Integer tax, String description, int salary, int max_bonus, Collection<Employee> employee) {
+        this.id = id;
         this.name = name;
         this.tax = tax;
         this.description = description;
         this.salary = salary;
         this.max_bonus = max_bonus;
+        this.employee = employee;
+    }
+
+    public Collection<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Collection<Employee> employee) {
+        this.employee = employee;
     }
 
     public Dolj() {

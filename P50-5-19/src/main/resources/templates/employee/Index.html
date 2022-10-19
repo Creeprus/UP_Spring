@@ -7,7 +7,7 @@
   <title>Employees</title>
 </head>
 <body>
-<div th:insert="fragments/header" :: headerMain></div>
+<div th:insert="fragments/header :: headerMain"></div>
 <div class="row">
 
 <h1>Список сотрудников</h1>
@@ -27,8 +27,8 @@
   </form>
 
 </div>
-<a href="/Employee/IndexAddEmp" class="btn btn-light">Добавить сотрудника</a>
-<a href="/Home">Home</a>
+<a href="/Employee/IndexAddEmp" class="btn btn-light">Добавить сотрудника</a><br>
+<a href="/Home" class="btn btn-secondary">Home</a>
 </body>
 
 </html>

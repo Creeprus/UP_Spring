@@ -1,10 +1,9 @@
 package ru.spring.P50519.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
+
 
 @Entity
 public class Employee {
@@ -32,6 +31,43 @@ public class Employee {
     @Size(min=3,max=50,message="Поле должно содержать не менне 3х и не более 30 символов")
     private String nationality;
 
+    @ManyToOne(optional =true, cascade =CascadeType.ALL)
+    private Dolj dolj;
+
+    @OneToOne(optional = true,cascade = CascadeType.ALL)
+    @JoinColumn(name="account_id")
+    private Account account;
+
+    @ManyToMany
+    @JoinTable(name="employee_adress",
+    joinColumns=@JoinColumn(name = "employee_id"),
+    inverseJoinColumns=@JoinColumn(name = "adress_id"))
+    private List<Adress> adresses;
+
+    public Dolj getDolj() {
+        return dolj;
+    }
+
+    public void setDolj(Dolj dolj) {
+        this.dolj = dolj;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Adress> getAdresses() {
+        return adresses;
+    }
+
+    public void setAdresses(List<Adress> adresses) {
+        this.adresses = adresses;
+    }
+
     public String getNationality() {
         return nationality;
     }
@@ -40,13 +76,17 @@ public class Employee {
         this.nationality = nationality;
     }
 
-    public Employee(String name, String surname, String patronymic, int age, int amount_of_kids,String nationality) {
+    public Employee(Long id, String name, String surname, String patronymic, int age, int amount_of_kids, String nationality, Dolj dolj, Account account, List<Adress> adresses) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.age = age;
         this.amount_of_kids = amount_of_kids;
-        this.nationality=nationality;
+        this.nationality = nationality;
+        this.dolj = dolj;
+        this.account = account;
+        this.adresses = adresses;
     }
 
     public int getAge() {
