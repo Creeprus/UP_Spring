@@ -23,9 +23,9 @@
     <div th:if="${#fields.hasErrors('amount_of_kids')}" th:errors="*{amount_of_kids}" style="color:red"></div><br>
     <input th:field="*{nationality}" type="text" placeholder="Национальность" name="nationality"><br>
     <div th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" style="color:red"></div><br>
-    <input th:field="${account.login}" type="text" placeholder="Логин" name="login"><br>
+    <input th:field="${account.nickname}" type="text" placeholder="Никнейм" name="nickname"><br>
 <!--    <div th:if="${#fields.hasErrors('login')}" th:errors="${account.login}" style="color:red"></div><br>-->
-    <input th:field="${account.password}" type="text" placeholder="Пароль" name="password"><br>
+    <input th:field="${account.description_user}" type="text" placeholder="Информация" name="description_user"><br>
 <!--    <div th:if="${#fields.hasErrors('password')}" th:errors="${account.password}" style="color:red"></div><br>-->
     <select name="listDolj">
       <div th:each="element : ${listDolj}">

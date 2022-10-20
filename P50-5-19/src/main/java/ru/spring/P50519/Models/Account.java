@@ -11,21 +11,20 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotBlank(message = "Пробелы недопустимы")
-private String login;
+private String nickname;
     @NotBlank(message = "Пробелы недопустимы")
     @Size(min=5,max=50,message = "Минимум 5 и максимум 50 символов")
-    private String Password;
+    private String description_user;
 @OneToOne(optional = true,mappedBy = "account")
 private Employee employee;
-
 
     public Account() {
     }
 
-    public Account(Long id, String login, String password, Employee employee) {
+    public Account(Long id, String nickname, String description_user, Employee employee) {
         this.id = id;
-        this.login = login;
-        this.Password = password;
+        this.nickname = nickname;
+        this.description_user = description_user;
         this.employee = employee;
     }
 
@@ -37,12 +36,20 @@ private Employee employee;
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getDescription_user() {
+        return description_user;
+    }
+
+    public void setDescription_user(String description_user) {
+        this.description_user = description_user;
     }
 
     public Employee getEmployee() {
@@ -51,13 +58,5 @@ private Employee employee;
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
     }
 }
