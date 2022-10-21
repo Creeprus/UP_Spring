@@ -31,8 +31,7 @@ public class AdressController {
     @GetMapping("/Index")
     public String Adress(Model model)
     {
-//        Iterable<Employee> listEmp= employeeRepository.findAll();
-//        model.addAttribute("listEmp",listEmp);
+
         Iterable<Adress> listAdress= adressRepository.findAll();
 
         model.addAttribute("listAdress",listAdress);
