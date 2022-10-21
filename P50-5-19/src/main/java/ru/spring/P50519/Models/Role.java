@@ -1,5 +1,12 @@
 package ru.spring.P50519.Models;
 
-public enum Role {
-    USER;
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+    USER,ADMIN,HR;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

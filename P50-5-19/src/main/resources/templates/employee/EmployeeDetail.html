@@ -16,8 +16,8 @@
     <p th:text="${el.getAge()}"> </p>
     <p th:text="${el.amount_of_kids}"> </p>
     <p th:text="${el.nationality}"> </p>
-    <p th:text="${el.account.nickname}"> </p>
-    <p th:text="${el.account.description_user}"> </p>
+    <p th:text="${el.account.login}"> </p>
+    <p th:text="${el.account.password}"> </p>
     <p th:text="${el.dolj.name}"> Должность</p>
     <a th:href="'/Employee/EmployeeEdit/' +${el.id}" class="btn btn-primary">Изменить</a><br>
     <a th:href="'/Employee/EmployeeDelete/' +${el.id}" class="btn btn-secondary">Удалить</a>
