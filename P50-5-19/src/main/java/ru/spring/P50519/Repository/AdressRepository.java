@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface AdressRepository extends CrudRepository<Adress,Long> {
    Adress findByLocation(String name);
+   List<Adress> findAll();
 
 }
